@@ -27,3 +27,15 @@ export interface SoupSearchParam {
   content?: string;
   username?: string;
 }
+
+export interface User {
+  id: number;
+  name: string;
+}
+
+export interface AppContextInterface {
+  user: User | null;
+  theme: string;
+  updateUser: Function;
+  updateTheme: Function;
+}

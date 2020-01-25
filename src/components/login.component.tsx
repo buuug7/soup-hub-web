@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Api } from "../config";
+import { AppContext } from "../App";
 
 const LoginComponent: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("youpp@126.com");
+  const [password, setPassword] = useState<string>("111111");
   const [error, setError] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const history = useHistory();
+  const context = useContext(AppContext);
 
   const login = async () => {
     const response = await fetch(`${Api}/auth/login`, {
@@ -39,6 +43,10 @@ const LoginComponent: React.FC = () => {
     sessionStorage.setItem("user", JSON.stringify(rsProfile));
 
     console.log("rsProfile=", rsProfile);
+
+    context.updateUser(rsProfile);
+
+    history.push("/");
   };
 
   return (
@@ -50,6 +58,7 @@ const LoginComponent: React.FC = () => {
             className="form-control"
             type="text"
             placeholder={"邮箱"}
+            value={email}
             onChange={e => setEmail(e.target.value)}
           />
         </div>
@@ -58,6 +67,7 @@ const LoginComponent: React.FC = () => {
             className="form-control"
             type="password"
             placeholder={"密码"}
+            value={password}
             onChange={e => setPassword(e.target.value)}
           />
         </div>
