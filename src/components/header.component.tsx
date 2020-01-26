@@ -9,13 +9,20 @@ const HeaderComponent: React.FC = () => {
 
   return (
     <header className="app-header">
-      <a href="/" className="app-header-title">
-        鸡汤Hub
-      </a>
-      <div>
-        <Link to={context.user ? "/profile" : "/login"} className="app-header-login-btn">
-          {context.user?.name || "登陆"}
-        </Link>
+      <div className="container">
+        <a href="/" className="app-header-title">
+          鸡汤Hub
+        </a>
+        <div className="app-header-right">
+          <div />
+          <ul>
+            <li>
+              <Link to={context.user ? "/profile" : "/login"} className="app-header-link">
+                {context.user?.name || "登陆"}
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
   );

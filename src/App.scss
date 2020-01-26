@@ -2,15 +2,17 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
-  font-size: 1rem;
-  font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  //color: #212529;
   text-align: left;
   background-color: #f7f7f7;
+
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  height: auto;
+  color: #000;
+  font-family: Formular, Arial, sans-serif;
+  font-weight: 300;
 }
 
 a {
@@ -19,33 +21,66 @@ a {
   text-decoration: none;
 }
 
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
 .app-header {
   background-color: $primary-color;
   padding: 0.5rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  z-index: 1000;
+
+  > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    list-style: none;
+    display: inline-block;
+  }
 }
 
 .app-header-title {
   display: inline-block;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: 1.25rem;
   padding: 0.3rem 1rem 0.3rem 0;
 }
 
-.app-header-login-btn {
-  color: #fff;
+.app-header-right {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-header-link {
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   cursor: pointer;
   display: inline-block;
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .soup-list {
-  max-width: 50rem;
-  margin: 0 auto;
+  width: 40rem;
 }
 
 .soup {
@@ -59,6 +94,11 @@ a {
   margin: 1rem 0 0.5rem 0;
   color: $second-color;
   font-size: 0.9rem;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
 .form-control {
@@ -83,14 +123,18 @@ a {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
+
+  &.disabled {
+    opacity: 0.6;
+  }
 }
 
 .form-group {
   margin-bottom: 1rem;
 }
 
-.login {
-  padding: 1rem;
+.profile .content {
   background-color: #fff;
-  max-width: 35rem;
+  padding: 1rem;
+  width: 40rem;
 }

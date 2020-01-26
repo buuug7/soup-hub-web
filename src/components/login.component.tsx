@@ -51,42 +51,49 @@ const LoginComponent: React.FC = () => {
 
   return (
     <div className="login">
-      <h4>鸡汤Hub｜用户登陆</h4>
-      <form className="login-form">
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            placeholder={"邮箱"}
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="password"
-            placeholder={"密码"}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
+      <h2>用户登陆</h2>
 
-        <div className="form-group">
-          <span style={{ color: "red" }}>{error}</span>
-        </div>
+      <div className="card" style={{ width: "40rem" }}>
+        <div className="body">
+          <form>
+            <div className="form-group">
+              <label>邮箱</label>
+              <input
+                className="form-control"
+                type="text"
+                placeholder={"邮箱"}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>密码</label>
+              <input
+                className="form-control"
+                type="password"
+                placeholder={"密码"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
 
-        <button
-          className="btn btn-outline"
-          type="submit"
-          onClick={e => {
-            e.preventDefault();
-            login();
-          }}
-        >
-          登陆
-        </button>
-      </form>
+            <div className="form-group">
+              <span style={{ color: "red" }}>{error}</span>
+            </div>
+
+            <button
+              className="btn btn-outline"
+              type="submit"
+              onClick={e => {
+                e.preventDefault();
+                login();
+              }}
+            >
+              登陆
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

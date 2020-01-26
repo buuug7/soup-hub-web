@@ -6,6 +6,7 @@ import HeaderComponent from "./components/header.component";
 import LoginComponent from "./components/login.component";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { AppContextInterface, User } from "./app.interface";
+import ProfileComponent from "./components/profile.component";
 
 const defaultContentValue = {
   user: null,
@@ -35,19 +36,24 @@ const App: React.FC = () => {
       <div className="App">
         <BrowserRouter>
           <HeaderComponent />
-          <main style={{ padding: "1rem" }}>
-            <Switch>
-              <Route exact path={"/"}>
-                <SoupsComponent
-                  paginationParam={{ currentPage: 1 }}
-                  soupSearchParam={{ content: "" }}
-                />
-              </Route>
-              <Route path={"/login"}>
-                <LoginComponent />
-              </Route>
-            </Switch>
-          </main>
+          <div className="container">
+            <main style={{ marginTop: "1rem" }}>
+              <Switch>
+                <Route exact path={"/"}>
+                  <SoupsComponent
+                    paginationParam={{ currentPage: 1 }}
+                    soupSearchParam={{ content: "" }}
+                  />
+                </Route>
+                <Route path={"/login"}>
+                  <LoginComponent />
+                </Route>
+                <Route path={"/profile"}>
+                  <ProfileComponent />
+                </Route>
+              </Switch>
+            </main>
+          </div>
         </BrowserRouter>
       </div>
     </AppContext.Provider>
