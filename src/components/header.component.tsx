@@ -11,7 +11,7 @@ const HeaderComponent: React.FC = () => {
     <header className="app-header">
       <div className="container">
         <a href="/" className="app-header-title">
-          鸡汤Hub
+          鸡汤文
         </a>
         <div className="app-header-right">
           <div />
