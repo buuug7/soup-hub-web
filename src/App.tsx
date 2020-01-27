@@ -11,8 +11,10 @@ import ProfileComponent from "./components/profile.component";
 const defaultContentValue = {
   user: null,
   theme: "default",
+  message: "",
   updateUser: () => {},
-  updateTheme: () => {}
+  updateTheme: () => {},
+  updateMessage: () => {}
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultContentValue);
@@ -23,12 +25,15 @@ const App: React.FC = () => {
 
   const [theme, setTheme] = useState<string>("default");
   const [user, setUser] = useState<User | null>(defaultUser);
+  const [message, setMessage] = useState<string>("");
 
   const contextValue = {
     theme,
     user,
+    message: message,
     updateUser: (user: User) => setUser(user),
-    updateTheme: (theme: string) => setTheme(theme)
+    updateTheme: (theme: string) => setTheme(theme),
+    updateMessage: (message: string) => setMessage(message)
   };
 
   return (
@@ -36,8 +41,13 @@ const App: React.FC = () => {
       <div className="App">
         <BrowserRouter>
           <HeaderComponent />
-          <div className="container" style={{ paddingTop: "1rem", display: "flex" }}>
-            <main style={{ flex: 2 }}>
+          {contextValue.message && (
+            <div className="alert" style={{ margin: ".5rem" }}>
+              {contextValue.message}
+            </div>
+          )}
+          <div className="container content" style={{ paddingTop: "1rem", display: "flex" }}>
+            <main style={{ flex: 2, marginBottom: "1rem" }}>
               <Switch>
                 <Route exact path={"/"}>
                   <SoupsComponent

@@ -29,6 +29,18 @@ a {
   margin-left: auto;
 }
 
+.content {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  aside {
+    padding: 0 !important;
+  }
+}
+
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;

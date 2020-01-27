@@ -3,6 +3,7 @@ import { PaginationParam, PaginationResponse, Soup, SoupSearchParam } from "../a
 import SoupComponent from "./soup.component";
 import qs from "qs";
 import { Api } from "../config";
+import { request } from "../http";
 
 const SoupsComponent: React.FC<{
   paginationParam: PaginationParam;
@@ -18,9 +19,8 @@ const SoupsComponent: React.FC<{
         perPage: paginationParam.perPage,
         ...soupSearchParam
       });
-      const res = await fetch(`${url}?${query}`);
-      const jsonData: PaginationResponse = await res.json();
-      setSoups(jsonData.data);
+      const [error, res]: [Error, PaginationResponse] = await request(`${url}?${query}`);
+      setSoups(res.data);
     };
     fetchSoups().then(r => {});
   }, [paginationParam, soupSearchParam]);

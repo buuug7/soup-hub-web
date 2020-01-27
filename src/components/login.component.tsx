@@ -2,51 +2,42 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Api } from "../config";
 import { AppContext } from "../App";
+import { request } from "../http";
 
 const LoginComponent: React.FC = () => {
   const [email, setEmail] = useState<string>("youpp@126.com");
   const [password, setPassword] = useState<string>("111111");
-  const [error, setError] = useState<string>("");
   const history = useHistory();
   const context = useContext(AppContext);
 
   const login = async () => {
-    const response = await fetch(`${Api}/auth/login`, {
+    const [error, resLogin] = await request(`${Api}/auth/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({
         email: email,
         password: password
       })
     });
 
-    const res = await response.json();
-
-    if (res.error) {
-      setError(res.error);
+    if (error) {
+      context.updateMessage(error.message);
       return;
     }
 
-    const token = res.access_token;
+    sessionStorage.setItem("token", resLogin.token);
 
-    sessionStorage.setItem("token", token);
+    const [error2, user] = await request(`${Api}/users/profile`);
 
-    const responseProfile = await fetch(`${Api}/users/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const rsProfile = await responseProfile.json();
+    if (error2) {
+      context.updateMessage(error2.message);
+      return;
+    }
 
-    sessionStorage.setItem("user", JSON.stringify(rsProfile));
+    sessionStorage.setItem("user", JSON.stringify(user));
 
-    console.log("rsProfile=", rsProfile);
+    context.updateUser(user);
 
-    context.updateUser(rsProfile);
-
-    history.push("/");
+    history.replace("/");
   };
 
   return (
@@ -75,10 +66,6 @@ const LoginComponent: React.FC = () => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
-            </div>
-
-            <div className="form-group">
-              <span style={{ color: "red" }}>{error}</span>
             </div>
 
             <button

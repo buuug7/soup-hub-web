@@ -38,6 +38,8 @@ export interface User {
 export interface AppContextInterface {
   user: User | null;
   theme: string;
+  message: string;
   updateUser: Function;
   updateTheme: Function;
+  updateMessage: Function;
 }
