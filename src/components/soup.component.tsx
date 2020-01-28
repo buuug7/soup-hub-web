@@ -12,9 +12,9 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }, marginRight = ".5rem"
 
   useEffect(() => {
     request(`${Api}/soups/${soup.id}/starCount`).then(res => {
-      setStarCount(res);
+      setStarCount(res[1]);
     });
-  }, [soup]);
+  }, [soup.id]);
 
   useEffect(() => {
     if (!isLogin()) {
@@ -22,10 +22,9 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }, marginRight = ".5rem"
     }
 
     request(`${Api}/soups/${soup.id}/isStarByRequestUser`).then(res => {
-      console.log("res=", res);
       setIsStar(res[1]);
     });
-  }, [starCount]);
+  }, [starCount, soup.id]);
 
   return (
     <div
@@ -49,11 +48,11 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }, marginRight = ".5rem"
               return;
             }
 
-            const [error, res] = await request(`${Api}/soups/${soup.id}/toggleStar`, {
+            const res = await request(`${Api}/soups/${soup.id}/toggleStar`, {
               method: "POST"
             });
 
-            setStarCount(res);
+            setStarCount(res[1]);
           }}
         >
           star ({starCount})

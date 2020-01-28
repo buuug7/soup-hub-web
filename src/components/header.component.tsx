@@ -5,8 +5,6 @@ import { AppContext } from "../App";
 const HeaderComponent: React.FC = () => {
   const context = useContext(AppContext);
 
-  console.log("context=", context);
-
   return (
     <header className="app-header">
       <div className="container">

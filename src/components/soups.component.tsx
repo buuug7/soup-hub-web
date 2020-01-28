@@ -20,6 +20,7 @@ const SoupsComponent: React.FC<{
         ...soupSearchParam
       });
       const [error, res]: [Error, PaginationResponse] = await request(`${url}?${query}`);
+      console.log("error=", error);
       setSoups(res.data);
     };
     fetchSoups().then(r => {});
