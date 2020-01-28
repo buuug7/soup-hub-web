@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@buuug7/simplify": "^2.1.1",
+    "@buuug7/simplify": "^2.2.0",
     "await-to-js": "^2.1.1",
     "dayjs": "^1.8.19",
     "node-sass": "^4.13.1",

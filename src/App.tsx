@@ -42,7 +42,13 @@ const App: React.FC = () => {
         <BrowserRouter>
           <HeaderComponent />
           {contextValue.message && (
-            <div className="alert" style={{ margin: ".5rem" }}>
+            <div
+              className="alert"
+              style={{ margin: ".5rem" }}
+              onClick={() => {
+                setMessage("");
+              }}
+            >
               {contextValue.message}
             </div>
           )}

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../App";
-import { Api } from "../config";
+import { Api } from "../util";
 
 const ProfileComponent: React.FC = () => {
   const context = useContext(AppContext);

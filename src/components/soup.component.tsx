@@ -1,39 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Soup } from "../app.interface";
 import dayjs from "dayjs";
-import { Api } from "../config";
+import { Api, isLogin } from "../util";
+import { request } from "../http";
+import { AppContext } from "../App";
 
 const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }, marginRight = ".5rem") => {
   const [starCount, setStarCount] = useState(0);
-
-  const star = async (id: number) => {
-    const token = sessionStorage.getItem("token");
-    const res = await fetch(`${Api}/soups/${id}/star`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    });
-
-    const rs = await res.json();
-
-    setStarCount(rs);
-
-    console.log(rs);
-  };
+  const [isStar, setIsStar] = useState(false);
+  const context = useContext(AppContext);
 
   useEffect(() => {
-    const getStarCount = async () => {
-      const res = await fetch(`${Api}/soups/${soup.id}/starCount`);
-      const rs = await res.json();
-      console.log("cout=", rs);
-
-      setStarCount(rs);
-    };
-
-    getStarCount();
+    request(`${Api}/soups/${soup.id}/starCount`).then(res => {
+      setStarCount(res);
+    });
   }, [soup]);
+
+  useEffect(() => {
+    if (!isLogin()) {
+      return;
+    }
+
+    request(`${Api}/soups/${soup.id}/isStarByRequestUser`).then(res => {
+      console.log("res=", res);
+      setIsStar(res[1]);
+    });
+  }, [starCount]);
 
   return (
     <div
@@ -50,9 +42,18 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }, marginRight = ".5rem"
       </div>
       <div className="soup-action">
         <button
-          className="btn btn-text"
-          onClick={() => {
-            star(soup.id);
+          className={`btn ${isStar ? "btn-outline" : "btn-text"}`}
+          onClick={async () => {
+            if (!isLogin()) {
+              context.updateMessage("please login");
+              return;
+            }
+
+            const [error, res] = await request(`${Api}/soups/${soup.id}/toggleStar`, {
+              method: "POST"
+            });
+
+            setStarCount(res);
           }}
         >
           star ({starCount})

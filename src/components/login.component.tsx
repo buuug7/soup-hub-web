@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Api } from "../config";
+import { Api } from "../util";
 import { AppContext } from "../App";
 import { request } from "../http";
 
@@ -25,19 +25,16 @@ const LoginComponent: React.FC = () => {
     }
 
     sessionStorage.setItem("token", resLogin.token);
+  };
 
-    const [error2, user] = await request(`${Api}/users/profile`);
-
-    if (error2) {
-      context.updateMessage(error2.message);
-      return;
+  const getUserInfo = async () => {
+    const [error, user] = await request(`${Api}/users/profile`);
+    if (error) {
+      context.updateMessage(error.message);
     }
 
-    sessionStorage.setItem("user", JSON.stringify(user));
-
     context.updateUser(user);
-
-    history.replace("/");
+    sessionStorage.setItem("user", JSON.stringify(user));
   };
 
   return (
@@ -71,9 +68,12 @@ const LoginComponent: React.FC = () => {
             <button
               className="btn btn-outline"
               type="submit"
-              onClick={e => {
+              onClick={async e => {
                 e.preventDefault();
-                login();
+
+                await login();
+                await getUserInfo();
+                history.replace("/");
               }}
             >
               登陆
