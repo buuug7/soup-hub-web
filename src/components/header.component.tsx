@@ -8,9 +8,9 @@ const HeaderComponent: React.FC = () => {
   return (
     <header className="app-header">
       <div className="container">
-        <a href="/" className="app-header-title">
+        <Link to="/" className="app-header-title">
           鸡汤文
-        </a>
+        </Link>
         <div className="app-header-right">
           <div />
           <ul>

@@ -43,3 +43,12 @@ export interface AppContextInterface {
   updateTheme: Function;
   updateMessage: Function;
 }
+
+export interface Comment {
+  id: number;
+  content: string;
+  createdAt: string;
+  commentType: string;
+  commentTypeId: number;
+  user: User;
+}

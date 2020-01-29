@@ -3,7 +3,7 @@ import { Soup } from "../app.interface";
 import { Api, isLogin } from "../util";
 import { request } from "../http";
 import { AppContext } from "../App";
-import Comments from "./comments.component";
+import CommentsComponents from "./comments.component";
 
 const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
   const [starCount, setStarCount] = useState(0);
@@ -79,7 +79,7 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
         </button>
       </div>
 
-      {showComment && <Comments soupId={soup.id} />}
+      {showComment && <CommentsComponents soupId={soup.id} />}
     </div>
   );
 };

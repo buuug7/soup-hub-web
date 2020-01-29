@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PaginationParam, PaginationResponse, Soup, SoupSearchParam } from "../app.interface";
-import SoupComponent from "./soup.component";
+import CommentsComponent from "./soup.component";
 import qs from "qs";
 import { Api } from "../util";
 import { request } from "../http";
@@ -29,7 +29,7 @@ const SoupsComponent: React.FC<{
   return (
     <div className="soup-list">
       {soups.map((item: Soup, index) => (
-        <SoupComponent key={index} soup={item} />
+        <CommentsComponent key={index} soup={item} />
       ))}
     </div>
   );
