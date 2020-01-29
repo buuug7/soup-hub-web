@@ -1,12 +1,12 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import "./App.scss";
 
-import SoupsComponent from "./components/soups.component";
 import HeaderComponent from "./components/header.component";
 import LoginComponent from "./components/login.component";
+import MeComponent from "./components/me.component";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { AppContextInterface, User } from "./app.interface";
-import ProfileComponent from "./components/profile.component";
+import HomeComponent from "./components/home.component";
 
 const defaultContentValue = {
   user: null,
@@ -19,18 +19,36 @@ const defaultContentValue = {
 
 export const AppContext = createContext<AppContextInterface>(defaultContentValue);
 
+export const MessageComponent: React.FC = () => {
+  const context = useContext(AppContext);
+  return (
+    <div className="message">
+      {context.message && (
+        <div
+          className="alert"
+          style={{ margin: ".5rem" }}
+          onClick={() => {
+            context.updateMessage("");
+          }}
+        >
+          {context.message}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const sessionUser = sessionStorage.getItem("user");
   const defaultUser = sessionUser ? JSON.parse(sessionUser) : null;
-
+  const [message, setMessage] = useState<string>("");
   const [theme, setTheme] = useState<string>("default");
   const [user, setUser] = useState<User | null>(defaultUser);
-  const [message, setMessage] = useState<string>("");
 
   const contextValue = {
     theme,
     user,
-    message: message,
+    message,
     updateUser: (user: User) => setUser(user),
     updateTheme: (theme: string) => setTheme(theme),
     updateMessage: (message: string) => setMessage(message)
@@ -41,45 +59,12 @@ const App: React.FC = () => {
       <div className="App">
         <BrowserRouter>
           <HeaderComponent />
-          {contextValue.message && (
-            <div
-              className="alert"
-              style={{ margin: ".5rem" }}
-              onClick={() => {
-                setMessage("");
-              }}
-            >
-              {contextValue.message}
-            </div>
-          )}
-          <div className="container content" style={{ paddingTop: "1rem", display: "flex" }}>
-            <main style={{ flex: 2, marginBottom: "1rem" }}>
-              <Switch>
-                <Route exact path={"/"}>
-                  <SoupsComponent
-                    paginationParam={{ currentPage: 1 }}
-                    soupSearchParam={{ content: "" }}
-                  />
-                </Route>
-                <Route path={"/login"}>
-                  <LoginComponent />
-                </Route>
-                <Route path={"/profile"}>
-                  <ProfileComponent />
-                </Route>
-              </Switch>
-            </main>
-            <aside style={{ flex: 1, padding: "0 0 0 1rem" }}>
-              <div className="card">
-                <div className="header">nimi autem commodi</div>
-                <div className="body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi autem commodi
-                  consequuntur dolore ea. Ab deleniti distinctio facere fuga neque quis reiciendis
-                  sapiente tenetur velit? Mollitia non omnis sapiente sunt!
-                </div>
-              </div>
-            </aside>
-          </div>
+          <MessageComponent />
+          <Switch>
+            <Route exact path={"/"} children={<HomeComponent />} />
+            <Route exact path={"/login"} children={<LoginComponent />} />
+            <Route path={"/me"} children={<MeComponent />} />
+          </Switch>
         </BrowserRouter>
       </div>
     </AppContext.Provider>

@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { AppContext } from "../App";
 import { Api } from "../util";
 
 const ProfileComponent: React.FC = () => {
   const context = useContext(AppContext);
-  const history = useHistory();
   const [name, setName] = useState(context.user?.name);
   const [error, setError] = useState<string>("");
 
@@ -80,22 +78,6 @@ const ProfileComponent: React.FC = () => {
               更新
             </button>
           </form>
-        </div>
-      </div>
-
-      <h2>Other</h2>
-      <div className="card" style={{ width: "40rem" }}>
-        <div className="body">
-          <button
-            className="btn btn-outline"
-            onClick={() => {
-              sessionStorage.clear();
-              history.replace("/");
-              window.location.reload();
-            }}
-          >
-            登出
-          </button>
         </div>
       </div>
     </div>

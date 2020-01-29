@@ -15,7 +15,7 @@ const HeaderComponent: React.FC = () => {
           <div />
           <ul>
             <li>
-              <Link to={context.user ? "/profile" : "/login"} className="app-header-link">
+              <Link to={context.user ? "/me" : "/login"} className="app-header-link">
                 {context.user?.name || "登陆"}
               </Link>
             </li>
