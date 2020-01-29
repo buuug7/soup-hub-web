@@ -28,21 +28,21 @@ a {
   margin-left: auto;
 }
 
-.content {
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.home .content {
   @media (max-width: 768px) {
     flex-direction: column;
   }
 }
 
 @media (max-width: 768px) {
-  aside {
+  .home aside {
     padding: 0 !important;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
   }
 }
 
@@ -137,8 +137,6 @@ label {
   background-color: #fff;
 }
 
-
-
 .soup-meta {
   display: flex;
   justify-content: space-between;
@@ -195,5 +193,34 @@ label {
   .comment-time {
     color: $second-color;
     font-size: 0.9rem;
+  }
+}
+
+.fullscreen_loader {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+
+  h4 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .loader {
+    width: 200px;
+    height: 50px;
+    background: url(./loading.svg);
+    background-repeat: no-repeat;
+    background-position: top;
   }
 }

@@ -39,9 +39,11 @@ export interface AppContextInterface {
   user: User | null;
   theme: string;
   message: string;
+  loading: boolean;
   updateUser: Function;
   updateTheme: Function;
   updateMessage: Function;
+  updateLoading: Function;
 }
 
 export interface Comment {

@@ -12,9 +12,11 @@ const defaultContentValue = {
   user: null,
   theme: "default",
   message: "",
+  loading: false,
   updateUser: () => {},
   updateTheme: () => {},
-  updateMessage: () => {}
+  updateMessage: () => {},
+  updateLoading: () => {}
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultContentValue);
@@ -44,19 +46,28 @@ const App: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const [theme, setTheme] = useState<string>("default");
   const [user, setUser] = useState<User | null>(defaultUser);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const contextValue = {
     theme,
     user,
     message,
+    loading,
     updateUser: (user: User) => setUser(user),
     updateTheme: (theme: string) => setTheme(theme),
-    updateMessage: (message: string) => setMessage(message)
+    updateMessage: (message: string) => setMessage(message),
+    updateLoading: (loading: boolean) => setLoading(loading)
   };
 
   return (
     <AppContext.Provider value={contextValue}>
       <div className="App">
+        {loading && (
+          <div className="fullscreen_loader">
+            <h4> Please wait. Loading data... </h4>
+            <div className="loader" />
+          </div>
+        )}
         <BrowserRouter>
           <HeaderComponent />
           <MessageComponent />

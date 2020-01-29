@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { request } from "../http";
 import { Api } from "../util";
 import { Comment } from "../app.interface";
+import { AppContext } from "../App";
 
 export const CommentComponent: React.FC<{ comment: Comment }> = ({ comment }) => {
   return (
@@ -29,12 +30,18 @@ export const CommentComponent: React.FC<{ comment: Comment }> = ({ comment }) =>
 };
 
 const CommentsComponent: React.FC<{ soupId: number }> = ({ soupId }) => {
+  const context = useContext(AppContext);
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
-    request(`${Api}/soups/${soupId}/comments`).then(res => {
-      setComments(res[1].data);
-    });
+    context.updateLoading(true);
+
+    setTimeout(() => {
+      request(`${Api}/soups/${soupId}/comments`).then(res => {
+        setComments(res[1].data);
+        context.updateLoading(false);
+      });
+    }, 2000);
   }, [soupId]);
 
   return (

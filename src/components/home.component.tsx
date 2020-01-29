@@ -4,7 +4,7 @@ import SoupsComponent from "./soups.component";
 const HomeComponent: React.FC = () => {
   return (
     <div className="home">
-      <div className="container" style={{ paddingTop: "1rem", display: "flex" }}>
+      <div className="container content" style={{ paddingTop: "1rem", display: "flex" }}>
         <main style={{ flex: 2, marginBottom: "1rem" }}>
           <SoupsComponent paginationParam={{ currentPage: 1 }} soupSearchParam={{ content: "" }} />
         </main>
