@@ -21,7 +21,7 @@ const SoupCreateComponent: React.FC = () => {
     <div className="create-soup container">
       <h2>Soup create</h2>
       <div className="card">
-        <div className="body">
+        <div className="card-body">
           <form>
             <div className="form-group">
               <label>Soup content</label>

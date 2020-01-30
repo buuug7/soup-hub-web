@@ -13,7 +13,7 @@ const MyComponent: React.FC = () => {
         <Route exact path={path}>
           <h2>My related</h2>
           <div className="card" style={{ width: "40rem" }}>
-            <div className="body">
+            <div className="card-body">
               <ul>
                 <li>
                   <Link to={`${url}/my-profile`}>My profile</Link>
@@ -39,7 +39,7 @@ const MyComponent: React.FC = () => {
         <Route exact path={`${path}/logout`}>
           <h2>Logout</h2>
           <div className="card" style={{ width: "40rem" }}>
-            <div className="body">
+            <div className="card-body">
               <button
                 className="btn btn-outline"
                 onClick={() => {

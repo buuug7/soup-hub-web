@@ -36,12 +36,10 @@ const CommentsComponent: React.FC<{ soupId: number }> = ({ soupId }) => {
   useEffect(() => {
     context.updateLoading(true);
 
-    setTimeout(() => {
-      request(`${Api}/soups/${soupId}/comments`).then(res => {
-        setComments(res[1].data);
-        context.updateLoading(false);
-      });
-    }, 2000);
+    request(`${Api}/soups/${soupId}/comments`).then(res => {
+      setComments(res[1].data);
+      context.updateLoading(false);
+    });
   }, [soupId]);
 
   return (

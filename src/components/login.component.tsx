@@ -42,7 +42,7 @@ const LoginComponent: React.FC = () => {
       <h2>用户登陆</h2>
 
       <div className="card" style={{ maxWidth: "40rem" }}>
-        <div className="body">
+        <div className="card-body">
           <form>
             <div className="form-group">
               <label>邮箱</label>

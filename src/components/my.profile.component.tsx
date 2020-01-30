@@ -32,7 +32,7 @@ const MyProfileComponent: React.FC = () => {
       <h2>My profile</h2>
 
       <div className="card" style={{ width: "40rem" }}>
-        <div className="body">
+        <div className="card-body">
           <form>
             <div className="form-group">
               <label>Email</label>
