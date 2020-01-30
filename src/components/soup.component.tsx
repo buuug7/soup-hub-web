@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Soup } from "../app.interface";
-import { Api, isLogin } from "../util";
+import { BASE_URL, isLogin } from "../util";
 import { request } from "../http";
 import { AppContext } from "../App";
 import CommentsComponents from "./comments.component";
@@ -13,7 +13,7 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
   const context = useContext(AppContext);
 
   useEffect(() => {
-    request(`${Api}/soups/${soup.id}/starCount`).then(res => {
+    request(`${BASE_URL}/soups/${soup.id}/starCount`).then(res => {
       setStarCount(res[1]);
     });
   }, [soup.id]);
@@ -23,13 +23,13 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
       return;
     }
 
-    request(`${Api}/soups/${soup.id}/isStarByRequestUser`).then(res => {
+    request(`${BASE_URL}/soups/${soup.id}/isStarByRequestUser`).then(res => {
       setIsStar(res[1]);
     });
   }, [starCount, soup.id]);
 
   useEffect(() => {
-    request(`${Api}/soups/${soup.id}/comments/count`).then(res => {
+    request(`${BASE_URL}/soups/${soup.id}/comments/count`).then(res => {
       setCommentsCount(res[1]);
     });
   }, [soup.id]);
@@ -59,7 +59,7 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
               return;
             }
 
-            const res = await request(`${Api}/soups/${soup.id}/toggleStar`, {
+            const res = await request(`${BASE_URL}/soups/${soup.id}/toggleStar`, {
               method: "POST"
             });
 

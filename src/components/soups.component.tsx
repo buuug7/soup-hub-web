@@ -1,42 +1,62 @@
 import React, { useContext, useEffect, useState } from "react";
-import { PaginationParam, PaginationResponse, Soup, SoupSearchParam } from "../app.interface";
+import { Pagination, Soup } from "../app.interface";
 import CommentsComponent from "./soup.component";
 import qs from "qs";
-import { Api } from "../util";
 import { request } from "../http";
 import { AppContext } from "../App";
 
-const SoupsComponent: React.FC<{
-  paginationParam: PaginationParam;
-  soupSearchParam?: SoupSearchParam;
-}> = ({ paginationParam, soupSearchParam }) => {
-  const [soups, setSoups] = useState<Soup[]>([]);
+const SoupsComponent: React.FC<{ api: string }> = ({ api }) => {
+  const [moreText, setMoreText] = useState("加载更多");
+  const [pagination, setPagination] = useState<Pagination>({
+    total: 0,
+    totalPage: 0,
+    perPage: 5,
+    currentPage: 1,
+    data: []
+  });
+
   const context = useContext(AppContext);
 
-  const fetchSoups = async () => {
-    const url = `${Api}/soups`;
+  const fetchSoups = async (pagination: Pagination) => {
+    context.updateLoading(true);
     const query = qs.stringify({
-      paginationParam: paginationParam.currentPage,
-      perPage: paginationParam.perPage,
-      ...soupSearchParam
+      currentPage: pagination.currentPage,
+      perPage: pagination.perPage
     });
-    const [error, res]: [Error, PaginationResponse] = await request(`${url}?${query}`);
+    const [error, res]: [Error, Pagination] = await request(`${api}?${query}`);
     console.log("error=", error);
-    setSoups(res.data);
+    setPagination({
+      ...res,
+      data: pagination.data.concat(res.data)
+    });
+    context.updateLoading(false);
   };
 
   useEffect(() => {
-    context.updateLoading(true);
-    fetchSoups().then(r => {
-      context.updateLoading(false);
-    });
+    fetchSoups(pagination);
   }, []);
 
   return (
     <div className="soup-list">
-      {soups.map((item: Soup, index) => (
+      {pagination.data.map((item: Soup, index) => (
         <CommentsComponent key={index} soup={item} />
       ))}
+
+      <button
+        className="btn btn-text block"
+        onClick={() => {
+          if (pagination.currentPage < pagination.totalPage) {
+            fetchSoups({
+              ...pagination,
+              currentPage: pagination.currentPage + 1
+            });
+          } else {
+            setMoreText("没有更多了！");
+          }
+        }}
+      >
+        {moreText}
+      </button>
     </div>
   );
 };

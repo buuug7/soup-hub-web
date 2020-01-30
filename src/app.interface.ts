@@ -12,17 +12,12 @@ export interface Soup {
   };
 }
 
-export interface PaginationResponse {
+export interface Pagination {
   total: number;
   totalPage: number;
   perPage: number;
   currentPage: number;
   data: any[];
-}
-
-export interface PaginationParam {
-  currentPage: number;
-  perPage?: number;
 }
 
 export interface SoupSearchParam {

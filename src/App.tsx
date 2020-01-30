@@ -8,6 +8,7 @@ import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import { AppContextInterface, User } from "./app.interface";
 import HomeComponent from "./components/home.component";
 import SoupCreateComponent from "./components/soup.create.component";
+import { getSessionUser } from "./util";
 
 const defaultContentValue = {
   user: null,
@@ -42,8 +43,7 @@ export const MessageComponent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const sessionUser = sessionStorage.getItem("user");
-  const defaultUser = sessionUser ? JSON.parse(sessionUser) : null;
+  const defaultUser = getSessionUser();
   const [message, setMessage] = useState<string>("");
   const [theme, setTheme] = useState<string>("default");
   const [user, setUser] = useState<User | null>(defaultUser);

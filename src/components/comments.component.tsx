@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { request } from "../http";
-import { Api } from "../util";
+import { BASE_URL } from "../util";
 import { Comment } from "../app.interface";
 import { AppContext } from "../App";
 
@@ -36,7 +36,7 @@ const CommentsComponent: React.FC<{ soupId: number }> = ({ soupId }) => {
   useEffect(() => {
     context.updateLoading(true);
 
-    request(`${Api}/soups/${soupId}/comments`).then(res => {
+    request(`${BASE_URL}/soups/${soupId}/comments`).then(res => {
       setComments(res[1].data);
       context.updateLoading(false);
     });

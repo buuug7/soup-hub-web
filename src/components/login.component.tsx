@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Api } from "../util";
+import { BASE_URL } from "../util";
 import { AppContext } from "../App";
 import { request } from "../http";
 
@@ -11,7 +11,7 @@ const LoginComponent: React.FC = () => {
   const context = useContext(AppContext);
 
   const login = async () => {
-    const [error, resLogin] = await request(`${Api}/auth/login`, {
+    const [error, resLogin] = await request(`${BASE_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
         email: email,
@@ -28,7 +28,7 @@ const LoginComponent: React.FC = () => {
   };
 
   const getUserInfo = async () => {
-    const [error, user] = await request(`${Api}/users/profile`);
+    const [error, user] = await request(`${BASE_URL}/users/profile`);
     if (error) {
       context.updateMessage(error.message);
     }

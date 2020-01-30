@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { request } from "../http";
-import { Api } from "../util";
+import { BASE_URL } from "../util";
 import { AppContext } from "../App";
 
 const SoupCreateComponent: React.FC = () => {
@@ -58,7 +58,7 @@ const SoupCreateComponent: React.FC = () => {
                   }
 
                   context.updateLoading(true);
-                  request(`${Api}/soups`, {
+                  request(`${BASE_URL}/soups`, {
                     method: "POST",
                     body: JSON.stringify({
                       content: content,

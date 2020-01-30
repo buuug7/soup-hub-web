@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
-import { Api } from "../util";
+import { BASE_URL } from "../util";
 
 const MyProfileComponent: React.FC = () => {
   const context = useContext(AppContext);
@@ -10,7 +10,7 @@ const MyProfileComponent: React.FC = () => {
   const updateProfile = async () => {
     const token = sessionStorage.getItem("token");
 
-    const res = await fetch(`${Api}/users`, {
+    const res = await fetch(`${BASE_URL}/users`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

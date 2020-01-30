@@ -9,7 +9,7 @@ const HeaderComponent: React.FC = () => {
     <header className="app-header">
       <div className="container">
         <Link to="/" className="app-header-title">
-          鸡汤文
+          鸡汤
         </Link>
         <div className="app-header-right">
           <div />

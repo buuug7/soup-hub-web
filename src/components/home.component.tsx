@@ -1,12 +1,13 @@
 import React from "react";
 import SoupsComponent from "./soups.component";
+import { BASE_URL } from "../util";
 
 const HomeComponent: React.FC = () => {
   return (
     <div className="home">
       <div className="container content" style={{ paddingTop: "1rem", display: "flex" }}>
         <main style={{ flex: 2, marginBottom: "1rem" }}>
-          <SoupsComponent paginationParam={{ currentPage: 1 }} soupSearchParam={{ content: "" }} />
+          <SoupsComponent api={`${BASE_URL}/soups`} />
         </main>
         <aside style={{ flex: 1, padding: "0 0 0 1rem" }}>
           <div className="card">
