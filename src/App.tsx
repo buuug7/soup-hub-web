@@ -3,10 +3,11 @@ import "./App.scss";
 
 import HeaderComponent from "./components/header.component";
 import LoginComponent from "./components/login.component";
-import MeComponent from "./components/me.component";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import MyComponent from "./components/my.component";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import { AppContextInterface, User } from "./app.interface";
 import HomeComponent from "./components/home.component";
+import SoupCreateComponent from "./components/soup.create.component";
 
 const defaultContentValue = {
   user: null,
@@ -61,20 +62,25 @@ const App: React.FC = () => {
 
   return (
     <AppContext.Provider value={contextValue}>
-      <div className="App">
+      <div className="app">
         {loading && (
           <div className="fullscreen_loader">
             <h4> Please wait. Loading data... </h4>
             <div className="loader" />
           </div>
         )}
+
         <BrowserRouter>
+          <Link to={"/create-soup"} className="btn add-soup-btn">
+            Add
+          </Link>
           <HeaderComponent />
           <MessageComponent />
           <Switch>
             <Route exact path={"/"} children={<HomeComponent />} />
+            <Route exact path={"/create-soup"} children={<SoupCreateComponent />} />
             <Route exact path={"/login"} children={<LoginComponent />} />
-            <Route path={"/me"} children={<MeComponent />} />
+            <Route path={"/me"} children={<MyComponent />} />
           </Switch>
         </BrowserRouter>
       </div>

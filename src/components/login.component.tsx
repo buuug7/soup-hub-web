@@ -38,10 +38,10 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login container">
       <h2>用户登陆</h2>
 
-      <div className="card" style={{ width: "40rem" }}>
+      <div className="card" style={{ maxWidth: "40rem" }}>
         <div className="body">
           <form>
             <div className="form-group">

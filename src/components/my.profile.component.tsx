@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 import { Api } from "../util";
 
-const ProfileComponent: React.FC = () => {
+const MyProfileComponent: React.FC = () => {
   const context = useContext(AppContext);
   const [name, setName] = useState(context.user?.name);
   const [error, setError] = useState<string>("");
@@ -29,7 +29,7 @@ const ProfileComponent: React.FC = () => {
 
   return (
     <div className="profile">
-      <h2>Profile settings</h2>
+      <h2>My profile</h2>
 
       <div className="card" style={{ width: "40rem" }}>
         <div className="body">
@@ -84,4 +84,4 @@ const ProfileComponent: React.FC = () => {
   );
 };
 
-export default ProfileComponent;
+export default MyProfileComponent;

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
-import ProfileComponent from "./profile.component";
+import MyProfileComponent from "./my.profile.component";
+import MyCreatedSoupsComponent from "./my.created.soups.component";
 
-const MeComponent: React.FC = () => {
+const MyComponent: React.FC = () => {
   const { path, url } = useRouteMatch();
   const history = useHistory();
 
@@ -10,12 +11,21 @@ const MeComponent: React.FC = () => {
     <div className="me container">
       <Switch>
         <Route exact path={path}>
-          <h2>Me</h2>
-          <div className="card" style={{width: '40rem'}}>
+          <h2>My related</h2>
+          <div className="card" style={{ width: "40rem" }}>
             <div className="body">
               <ul>
                 <li>
-                  <Link to={`${url}/profile`}>Profile</Link>
+                  <Link to={`${url}/my-profile`}>My profile</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/my-create-soups`}>My created soups</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/my-star-soups`}>My star soups</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/my-star-comments`}>My star comments</Link>
                 </li>
                 <li>
                   <Link to={`${url}/logout`}>Logout</Link>
@@ -24,7 +34,8 @@ const MeComponent: React.FC = () => {
             </div>
           </div>
         </Route>
-        <Route exact path={`${path}/profile`} children={<ProfileComponent />} />
+        <Route exact path={`${path}/my-profile`} children={<MyProfileComponent />} />
+        <Route exact path={`${path}/my-create-soups`} children={<MyCreatedSoupsComponent />} />
         <Route exact path={`${path}/logout`}>
           <h2>Logout</h2>
           <div className="card" style={{ width: "40rem" }}>
@@ -47,4 +58,4 @@ const MeComponent: React.FC = () => {
   );
 };
 
-export default MeComponent;
+export default MyComponent;
