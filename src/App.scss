@@ -154,8 +154,6 @@ label {
 }
 
 .soup-meta {
-  display: flex;
-  justify-content: space-between;
   color: $second-color;
   font-size: 0.9rem;
   padding: 1rem 1rem 0 1rem;
@@ -163,6 +161,11 @@ label {
 
 .soup-text {
   padding: 1rem 1rem 1rem 1rem;
+}
+
+.soup-more{
+  padding: 0 1rem 1rem 1rem;
+  color: $second-color;
 }
 
 .soup-action {

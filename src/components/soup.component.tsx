@@ -47,6 +47,9 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
         </div>
       </div>
       <div className="soup-text">{soup.content}</div>
+      <div className="soup-more">
+        参考: {soup.more.reference || '未知'}
+      </div>
       <div className="soup-action">
         <button
           className={`btn ${isStar ? "" : "btn-outline"}`}

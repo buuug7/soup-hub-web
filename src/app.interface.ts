@@ -1,9 +1,11 @@
 export interface Soup {
   id: number;
   content: string;
-  extra?: object;
   createdAt: Date;
   updatedAt: Date;
+  more: {
+    reference: string;
+  };
   user: {
     id: number;
     name: string;

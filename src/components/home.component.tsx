@@ -10,8 +10,8 @@ const HomeComponent: React.FC = () => {
         </main>
         <aside style={{ flex: 1, padding: "0 0 0 1rem" }}>
           <div className="card">
-            <div className="header">nimi autem commodi</div>
-            <div className="body">
+            <div className="card-header">nimi autem commodi</div>
+            <div className="card-body">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi autem commodi
               consequuntur dolore ea. Ab deleniti distinctio facere fuga neque quis reiciendis
               sapiente tenetur velit? Mollitia non omnis sapiente sunt!
