@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 import { ReactComponent as LogoIcon } from "../logo.svg";
 
+import "./header.component.scss";
+
 const HeaderComponent: React.FC = () => {
   const context = useContext(AppContext);
 

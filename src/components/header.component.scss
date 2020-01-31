@@ -1,0 +1,43 @@
+.app-header {
+  background-color: #000;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+
+  > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-header-title {
+    display: flex;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.3rem 1rem 0.3rem 0;
+    justify-content: center;
+  }
+
+  .app-header-right {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+      display: inline-block;
+    }
+  }
+
+  .app-header-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.3rem;
+  }
+}

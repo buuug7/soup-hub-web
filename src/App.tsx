@@ -11,6 +11,8 @@ import SoupCreateComponent from "./components/soup.create.component";
 import { getSessionUser } from "./util";
 import ContributionGuideComponent from "./components/contribution.guide.component";
 
+import { ReactComponent as IconPlus } from "bootstrap-icons/icons/plus.svg";
+
 const defaultContentValue = {
   user: null,
   theme: "default",
@@ -73,7 +75,7 @@ const App: React.FC = () => {
 
         <BrowserRouter>
           <Link to={"/create-soup"} className="btn add-soup-btn">
-            Add
+            <IconPlus style={{ fontSize: "2rem" }} />
           </Link>
           <HeaderComponent />
           <MessageComponent />
@@ -82,7 +84,7 @@ const App: React.FC = () => {
             <Route exact path={"/create-soup"} children={<SoupCreateComponent />} />
             <Route exact path={"/login"} children={<LoginComponent />} />
             <Route path={"/me"} children={<MyComponent />} />
-            <Route path={'/contribution-guide'} exact children={<ContributionGuideComponent />} />
+            <Route path={"/contribution-guide"} exact children={<ContributionGuideComponent />} />
           </Switch>
         </BrowserRouter>
       </div>

@@ -5,6 +5,8 @@ import qs from "qs";
 import { request } from "../http";
 import { AppContext } from "../App";
 
+import "./soups.component.scss";
+
 const SoupsComponent: React.FC<{ api: string }> = ({ api }) => {
   const [moreText, setMoreText] = useState("加载更多");
   const [pagination, setPagination] = useState<Pagination>({
@@ -44,6 +46,7 @@ const SoupsComponent: React.FC<{ api: string }> = ({ api }) => {
 
       <button
         className="btn btn-text block"
+        style={{ marginBottom: "2rem" }}
         onClick={() => {
           if (pagination.currentPage < pagination.totalPage) {
             fetchSoups({

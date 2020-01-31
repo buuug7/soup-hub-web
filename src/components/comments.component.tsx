@@ -4,6 +4,8 @@ import { BASE_URL } from "../util";
 import { Comment } from "../app.interface";
 import { AppContext } from "../App";
 
+import './comments.component.scss'
+
 export const CommentComponent: React.FC<{ comment: Comment }> = ({ comment }) => {
   return (
     <div className="comment" key={comment.id}>
@@ -14,13 +16,13 @@ export const CommentComponent: React.FC<{ comment: Comment }> = ({ comment }) =>
         </div>
         <div className="comment-text">{comment.content}</div>
         <div className="comment-action">
-          <button className="btn">
+          <button className="btn sm">
             Star <span>(99+)</span>
           </button>
-          <button className="btn btn-outline" style={{ marginLeft: ".5rem" }}>
+          <button className="btn sm btn-outline">
             Reply
           </button>
-          <button className="btn btn-outline" style={{ marginLeft: ".5rem" }}>
+          <button className="btn sm btn-outline">
             Share
           </button>
         </div>
