@@ -9,6 +9,7 @@ import { AppContextInterface, User } from "./app.interface";
 import HomeComponent from "./components/home.component";
 import SoupCreateComponent from "./components/soup.create.component";
 import { getSessionUser } from "./util";
+import ContributionGuideComponent from "./components/contribution.guide.component";
 
 const defaultContentValue = {
   user: null,
@@ -81,6 +82,7 @@ const App: React.FC = () => {
             <Route exact path={"/create-soup"} children={<SoupCreateComponent />} />
             <Route exact path={"/login"} children={<LoginComponent />} />
             <Route path={"/me"} children={<MyComponent />} />
+            <Route path={'/contribution-guide'} exact children={<ContributionGuideComponent />} />
           </Switch>
         </BrowserRouter>
       </div>

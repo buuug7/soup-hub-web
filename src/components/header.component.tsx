@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
+import { ReactComponent as LogoIcon } from "../logo.svg";
 
 const HeaderComponent: React.FC = () => {
   const context = useContext(AppContext);
@@ -9,7 +10,10 @@ const HeaderComponent: React.FC = () => {
     <header className="app-header">
       <div className="container">
         <Link to="/" className="app-header-title">
-          鸡汤
+          <LogoIcon style={{ fontSize: "1.5rem" }} />
+          <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: "1.2rem" }}>
+            你的鸡汤
+          </span>
         </Link>
         <div className="app-header-right">
           <div />

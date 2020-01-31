@@ -50,7 +50,7 @@ a {
   position: relative;
 }
 
-.add-soup-btn{
+.add-soup-btn {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -85,11 +85,15 @@ a {
 }
 
 .app-header-title {
-  display: inline-block;
+  display: flex;
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 1.25rem;
   padding: 0.3rem 1rem 0.3rem 0;
+
+  justify-content: center;
+  //align-items: center;
+
+  //border: 1px solid red;
 }
 
 .app-header-right {
@@ -151,6 +155,7 @@ label {
 
 .soup {
   background-color: #fff;
+  overflow: auto;
 }
 
 .soup-meta {
@@ -163,7 +168,7 @@ label {
   padding: 1rem 1rem 1rem 1rem;
 }
 
-.soup-more{
+.soup-more {
   padding: 0 1rem 1rem 1rem;
   color: $second-color;
 }
@@ -242,4 +247,12 @@ label {
     background-repeat: no-repeat;
     background-position: top;
   }
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
 }

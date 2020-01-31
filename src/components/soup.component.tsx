@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Soup } from "../app.interface";
-import { BASE_URL, isLogin } from "../util";
+import { BASE_URL, isLogin, showdownConvert } from "../util";
 import { request } from "../http";
 import { AppContext } from "../App";
 import CommentsComponents from "./comments.component";
+
+import { ReactComponent as StarIcon} from "bootstrap-icons/icons/star.svg";
+
 
 const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
   const [starCount, setStarCount] = useState(0);
@@ -46,10 +49,12 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
           By <a href="#">{soup.user.name}</a> At {soup.createdAt}
         </div>
       </div>
-      <div className="soup-text">{soup.content}</div>
-      <div className="soup-more">
-        参考: {soup.more.reference || '未知'}
-      </div>
+      <div
+        className="soup-text"
+        dangerouslySetInnerHTML={{
+          __html: showdownConvert.makeHtml(soup.content)
+        }}
+      />
       <div className="soup-action">
         <button
           className={`btn ${isStar ? "" : "btn-outline"}`}
@@ -66,7 +71,7 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
             setStarCount(res[1]);
           }}
         >
-          star ({starCount})
+          <StarIcon /> ({starCount})
         </button>
         <button
           className={`${showComment ? "btn" : "btn btn-outline"}`}

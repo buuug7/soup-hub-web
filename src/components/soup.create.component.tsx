@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { request } from "../http";
-import { BASE_URL } from "../util";
+import { BASE_URL, showdownConvert } from "../util";
 import { AppContext } from "../App";
+
+import ReactMde from "react-mde";
+import "react-mde/lib/styles/css/react-mde-all.css";
 
 const SoupCreateComponent: React.FC = () => {
   const [content, setContent] = useState("");
-  const [reference, updateReference] = useState("http://");
+  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
   const context = useContext(AppContext);
 
   const validate = (): boolean => {
@@ -24,26 +27,14 @@ const SoupCreateComponent: React.FC = () => {
         <div className="card-body">
           <form>
             <div className="form-group">
-              <label>Soup content</label>
-              <textarea
-                name=""
-                id=""
-                cols={30}
-                rows={10}
-                className="form-control"
-                style={{ height: "10rem" }}
+              <ReactMde
                 value={content}
-                onChange={e => setContent(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>reference</label>
-              <input
-                className="form-control"
-                type="text"
-                value={reference}
-                onChange={e => updateReference(e.target.value)}
+                onChange={setContent}
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+                generateMarkdownPreview={markdown =>
+                  Promise.resolve(showdownConvert.makeHtml(markdown))
+                }
               />
             </div>
 
@@ -62,9 +53,7 @@ const SoupCreateComponent: React.FC = () => {
                     method: "POST",
                     body: JSON.stringify({
                       content: content,
-                      more: {
-                        reference: reference,
-                      }
+                      more: {}
                     })
                   }).then(res => {
                     console.log("res=", res);
@@ -74,7 +63,7 @@ const SoupCreateComponent: React.FC = () => {
                   });
                 }}
               >
-                submit
+                Create
               </button>
             </div>
           </form>
