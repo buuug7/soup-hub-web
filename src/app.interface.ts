@@ -50,4 +50,5 @@ export interface Comment {
   commentType: string;
   commentTypeId: number;
   user: User;
+  parent: Comment;
 }

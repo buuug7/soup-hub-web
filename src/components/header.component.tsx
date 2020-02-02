@@ -24,7 +24,7 @@ const HeaderComponent: React.FC = () => {
         </Link>
         <div className="app-header-right">
           <div className="app-menu">
-            <Link to={"/rank"} className="app-header-link">
+            <Link to="/rank" className="app-header-link">
               <IconGrid style={{ fontSize: "1.5rem", marginRight: ".2rem" }} />
               <span>排行</span>
             </Link>

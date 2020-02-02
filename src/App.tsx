@@ -12,6 +12,7 @@ import { getSessionUser } from "./util";
 import ContributionGuideComponent from "./components/contribution.guide.component";
 
 import { ReactComponent as IconPlus } from "bootstrap-icons/icons/plus.svg";
+import RankComponent from "./components/rank.component";
 
 const defaultContentValue = {
   user: null,
@@ -80,11 +81,12 @@ const App: React.FC = () => {
           <HeaderComponent />
           <MessageComponent />
           <Switch>
-            <Route exact path={"/"} children={<HomeComponent />} />
-            <Route exact path={"/create-soup"} children={<SoupCreateComponent />} />
-            <Route exact path={"/login"} children={<LoginComponent />} />
-            <Route path={"/me"} children={<MyComponent />} />
-            <Route path={"/contribution-guide"} exact children={<ContributionGuideComponent />} />
+            <Route exact path="/" children={<HomeComponent />} />
+            <Route exact path="/create-soup" children={<SoupCreateComponent />} />
+            <Route exact path="/login" children={<LoginComponent />} />
+            <Route path="/me" children={<MyComponent />} />
+            <Route path="/rank" exact children={<RankComponent />} />
+            <Route path="/contribution-guide" exact children={<ContributionGuideComponent />} />
           </Switch>
         </BrowserRouter>
       </div>

@@ -123,6 +123,15 @@ code {
   }
 }
 
+blockquote {
+  margin: 0 0 1rem;
+  padding: 0 1rem;
+  border-left: 0.25em solid $primary-color;
+  font-size: 1rem;
+  color: #868e96;
+  font-weight: 300;
+}
+
 .mt-1 {
   margin-top: 1rem;
 }

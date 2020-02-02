@@ -22,7 +22,7 @@ const SoupCreateComponent: React.FC = () => {
 
   return (
     <div className="create-soup container">
-      <h2>Soup create</h2>
+      <h2>新建鸡汤</h2>
       <div className="card">
         <div className="card-body">
           <form>
