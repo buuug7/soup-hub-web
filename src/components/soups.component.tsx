@@ -36,6 +36,7 @@ const SoupsComponent: React.FC<{ api: string }> = ({ api }) => {
 
   useEffect(() => {
     fetchSoups(pagination);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

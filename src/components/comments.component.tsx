@@ -1,16 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { request } from "../http";
-import { BASE_URL } from "../util";
+import { BASE_URL, getSessionUser } from "../util";
 import { Comment } from "../app.interface";
 import { AppContext } from "../App";
 
 import "./comments.component.scss";
+import { Link } from "react-router-dom";
 
 export const CommentComponent: React.FC<{ comment: Comment; repliedDone: Function }> = ({
   comment,
   repliedDone
 }) => {
   const [reply, setReply] = useState(false);
+  const [parent, setParent] = useState<Comment | null>(null);
+
+  useEffect(() => {
+    request(`${BASE_URL}/comments/${comment.id}/parent`).then(res => {
+      setParent(res[1]);
+    });
+  }, [comment]);
 
   return (
     <div>
@@ -18,13 +26,14 @@ export const CommentComponent: React.FC<{ comment: Comment; repliedDone: Functio
         <div className="comment-avatar">{comment.user.name.substr(0, 1)}</div>
         <div className="comment-content" style={{ flex: 1 }}>
           <div className="comment-time">
-            By <a href="#">{comment.user.name}</a> At <span>{comment.createdAt}</span>
+            By <Link to={`/users/${comment.user.id}/profile`}>{comment.user.name}</Link> At{" "}
+            <span>{comment.createdAt}</span>
           </div>
           <div className="comment-text">
-            {comment.parent && (
+            {parent && (
               <blockquote>
-                <a href="#">@Tom</a> <br />
-                {comment.content}
+                <Link to={`/users/${parent?.user.id}/profile`}>@{parent?.user.name}</Link> <br />
+                {parent.content}
               </blockquote>
             )}
             <div>{comment.content}</div>
@@ -65,10 +74,11 @@ const CommentCreateComponent: React.FC<{
 }> = ({ soupId, commentId, successFn, isReply }) => {
   const context = useContext(AppContext);
   const [newCommentContent, setNewCommentContent] = useState<string>("");
+  const sessionUser = getSessionUser();
 
   return (
     <div className="create-comment">
-      <div className="comment-avatar">B</div>
+      <div className="comment-avatar">{sessionUser?.name.substr(0, 1)}</div>
       <form>
         <textarea
           value={newCommentContent}
@@ -107,27 +117,42 @@ const CommentCreateComponent: React.FC<{
 };
 
 const CommentsComponent: React.FC<{ soupId: number }> = ({ soupId }) => {
-  const context = useContext(AppContext);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [moreText, setMoreText] = useState("加载更多");
 
   const getComments = () => {
     request(`${BASE_URL}/soups/${soupId}/comments`).then(res => {
       setComments(res[1].data);
-      context.updateLoading(false);
     });
   };
 
   useEffect(() => {
-    context.updateLoading(true);
     getComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soupId]);
 
   return (
-    <div className="comments">
-      <CommentCreateComponent isReply={false} soupId={soupId} successFn={() => getComments()} />
+    <div className="comments clearfix">
+      <CommentCreateComponent
+        isReply={false}
+        soupId={soupId}
+        successFn={() => {
+          getComments();
+        }}
+      />
       {comments.map(item => (
-        <CommentComponent key={item.id} comment={item} repliedDone={() => getComments()} />
+        <CommentComponent
+          key={item.id}
+          comment={item}
+          repliedDone={() => {
+            getComments();
+          }}
+        />
       ))}
+
+      <button className="btn btn-text block" style={{ marginBottom: "1rem" }}>
+        {moreText}
+      </button>
     </div>
   );
 };

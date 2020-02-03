@@ -151,3 +151,11 @@ blockquote {
   min-width: 55px;
   border-radius: 50%;
 }
+
+.clearfix {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}

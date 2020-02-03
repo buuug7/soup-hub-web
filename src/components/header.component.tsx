@@ -33,7 +33,7 @@ const HeaderComponent: React.FC = () => {
               其他
             </Link>
           </div>
-          <div style={{ flex: 1 }}></div>
+          <div style={{ flex: 1 }} />
           <div className="app-header-search">
             <form>
               <div className="input-group">

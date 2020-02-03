@@ -7,6 +7,7 @@ import CommentsComponents from "./comments.component";
 import { ReactComponent as StarIcon } from "bootstrap-icons/icons/star.svg";
 
 import "./soup.component.scss";
+import { Link } from "react-router-dom";
 
 const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
   const [starCount, setStarCount] = useState(0);
@@ -46,7 +47,7 @@ const SoupComponent: React.FC<{ soup: Soup }> = ({ soup }) => {
     >
       <div className="soup-meta">
         <div className="soup-time">
-          By <a href="#">{soup.user.name}</a> At {soup.createdAt}
+          By <Link to={`/users/${soup.user.id}/profile`}>{soup.user.name}</Link> At {soup.createdAt}
         </div>
       </div>
       <div
